@@ -210,14 +210,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             names = str_name.split(",");
         }
 
-        String mac = et_mac.getText().toString();
+        //可以描述指定的多个名称的设备，用“，”隔开
+        String[] macArray;
+        String strMac = et_mac.getText().toString();
+        if (TextUtils.isEmpty(strMac)) {
+            macArray = null;
+        } else {
+            macArray = strMac.split(",");
+        }
 
         boolean isAutoConnect = sw_auto.isChecked();
 
         BleScanRuleConfig scanRuleConfig = new BleScanRuleConfig.Builder()
                 .setServiceUuids(serviceUuids)      // 只扫描指定的服务的设备，可选
                 .setDeviceName(true, names)   // 只扫描指定广播名的设备，可选
-                .setDeviceMac(mac)                  // 只扫描指定mac的设备，可选
+                .setDeviceMac(macArray)                  // 只扫描指定mac的设备，可选
                 .setAutoConnect(isAutoConnect)      // 连接时的autoConnect参数，可选，默认false
                 .setScanTimeOut(10000)              // 扫描超时时间，可选，默认10秒
                 .build();

@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallback {
 
     private String[] mDeviceNames;
-    private String mDeviceMac;
+    private String[] mDeviceMac;
     private boolean mFuzzy;
     private boolean mNeedConnect;
     private long mScanTimeout;
@@ -72,7 +72,7 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
         checkDevice(bleDevice);
     }
 
-    public void prepare(String[] names, String mac, boolean fuzzy, boolean needConnect,
+    public void prepare(String[] names, String[] mac, boolean fuzzy, boolean needConnect,
                         long timeOut, BleScanPresenterImp bleScanPresenterImp) {
         mDeviceNames = names;
         mDeviceMac = mac;
@@ -110,14 +110,21 @@ public abstract class BleScanPresenter implements BluetoothAdapter.LeScanCallbac
     }
 
     private void checkDevice(BleDevice bleDevice) {
-        if (TextUtils.isEmpty(mDeviceMac) && (mDeviceNames == null || mDeviceNames.length < 1)) {
+        if ((mDeviceMac == null || mDeviceMac.length < 1)
+                && (mDeviceNames == null || mDeviceNames.length < 1)) {
             correctDeviceAndNextStep(bleDevice);
             return;
         }
 
-        if (!TextUtils.isEmpty(mDeviceMac)) {
-            if (!mDeviceMac.equalsIgnoreCase(bleDevice.getMac()))
+        if ((mDeviceMac != null && mDeviceMac.length > 0)) {
+            AtomicBoolean equal = new AtomicBoolean(false);
+            for (String mac:mDeviceMac) {
+                if (mac.equalsIgnoreCase(bleDevice.getMac()))
+                    equal.set(true);
+            }
+            if (!equal.get()) {
                 return;
+            }
         }
 
         if (mDeviceNames != null && mDeviceNames.length > 0) {

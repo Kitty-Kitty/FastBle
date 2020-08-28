@@ -9,7 +9,7 @@ public class BleScanRuleConfig {
 
     private UUID[] mServiceUuids = null;
     private String[] mDeviceNames = null;
-    private String mDeviceMac = null;
+    private String[] mDeviceMac = null;
     private boolean mAutoConnect = false;
     private boolean mFuzzy = false;
     private long mScanTimeOut = BleManager.DEFAULT_SCAN_TIME;
@@ -22,7 +22,7 @@ public class BleScanRuleConfig {
         return mDeviceNames;
     }
 
-    public String getDeviceMac() {
+    public String[] getDeviceMac() {
         return mDeviceMac;
     }
 
@@ -42,7 +42,7 @@ public class BleScanRuleConfig {
 
         private UUID[] mServiceUuids = null;
         private String[] mDeviceNames = null;
-        private String mDeviceMac = null;
+        private String[] mDeviceMac = null;
         private boolean mAutoConnect = false;
         private boolean mFuzzy = false;
         private long mTimeOut = BleManager.DEFAULT_SCAN_TIME;
@@ -58,7 +58,7 @@ public class BleScanRuleConfig {
             return this;
         }
 
-        public Builder setDeviceMac(String mac) {
+        public Builder setDeviceMac(String[] mac) {
             this.mDeviceMac = mac;
             return this;
         }

@@ -299,7 +299,7 @@ public class BleManager {
 
         UUID[] serviceUuids = bleScanRuleConfig.getServiceUuids();
         String[] deviceNames = bleScanRuleConfig.getDeviceNames();
-        String deviceMac = bleScanRuleConfig.getDeviceMac();
+        String[] deviceMac = bleScanRuleConfig.getDeviceMac();
         boolean fuzzy = bleScanRuleConfig.isFuzzy();
         long timeOut = bleScanRuleConfig.getScanTimeOut();
 
@@ -324,7 +324,7 @@ public class BleManager {
 
         UUID[] serviceUuids = bleScanRuleConfig.getServiceUuids();
         String[] deviceNames = bleScanRuleConfig.getDeviceNames();
-        String deviceMac = bleScanRuleConfig.getDeviceMac();
+        String[] deviceMac = bleScanRuleConfig.getDeviceMac();
         boolean fuzzy = bleScanRuleConfig.isFuzzy();
         long timeOut = bleScanRuleConfig.getScanTimeOut();
 

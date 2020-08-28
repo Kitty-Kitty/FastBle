@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FastBLE</string>
+    <string name="app_name">SensorService</string>
 
     <string name="notifyTitle">Prompt</string>
     <string name="gpsNotifyMsg">Current mobile phone scanning Bluetooth needs to open the positioning function</string>
@@ -37,5 +37,12 @@
     <string name="connected">Connected</string>
     <string name="disconnect">Disconnect</string>
     <string name="enter">Enter</string>
+    <string name="start_accept">Start accepting</string>
+    <string name="stop_accept">Stop accepting</string>
+    <string name="e001000000">Service initialization exception</string>
+    <string name="e002000000">Service start exception</string>
+    <string name="e003000000">Service stop exception</string>
+    <string name="configuration_file_path">SensorServiceConfiguration.xml</string>
+    <string name="password_error_message">error password!!!</string>
 
 </resources>

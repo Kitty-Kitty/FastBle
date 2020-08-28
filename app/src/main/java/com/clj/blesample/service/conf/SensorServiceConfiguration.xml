@@ -1,0 +1,37 @@
+<configuration>
+    <bleConfiguration>
+        <scanConfiguration>
+            <serviceUUID />
+            <deviceMac>F1:E1:D9:BD:13:51,CC:0C:30:4A:54:B3,DE:41:5B:D3:C6:CE</deviceMac>
+            <deviceName />
+            <scanTimeOut>200</scanTimeOut>
+            <autoConnect>false</autoConnect>
+        </scanConfiguration>
+        <characteristicConfiguration>
+            <notifyUUID />
+            <serviceUUID />
+        </characteristicConfiguration>
+        <connectOvertime>1000</connectOvertime>
+        <enableLog>true</enableLog>
+        <operateTimeout>200</operateTimeout>
+        <reconnectCount>3</reconnectCount>
+        <reconnectInterval>1000</reconnectInterval>
+    </bleConfiguration>
+    <devices>
+        <device>
+            <name>A</name>
+            <mac>F1:E1:D9:BD:13:51</mac>
+            <uuid>00000000-0000-0000-0000-000000000000</uuid>
+        </device>
+        <device>
+            <name>B</name>
+            <mac>CC:0C:30:4A:54:B3</mac>
+            <uuid>00000001-0000-0000-0000-000000000000</uuid>
+        </device>
+        <device>
+            <name>C</name>
+            <mac>DE:41:5B:D3:C6:CE</mac>
+            <uuid>00000002-0000-0000-0000-000000000000</uuid>
+        </device>
+    </devices>
+</configuration>

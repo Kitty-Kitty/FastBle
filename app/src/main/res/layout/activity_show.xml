@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#171717"
+        android:title="@string/app_name"
+        app:title="演示客户端（版权所有，仅供学习参考不能用于商业交易）"
+        app:titleTextColor="@android:color/white" />
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="274dp"
+        app:columnCount="1"
+        app:orientation="horizontal"
+        app:rowCount="3">
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#FFCCCC"
+            android:text="0"
+            android:textSize="50sp"
+            app:layout_gravity="fill" />
+
+        <Button
+            android:text="回退"
+            app:layout_gravity="fill" />
+
+
+    </android.support.v7.widget.GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="91dp">
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="onClick"
+            android:text="@string/start_accept"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!--<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="91dp">
+
+        <Button
+            android:id="@+id/btn_accept"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:onClick="onClick"
+            android:text="@string/start_accept"
+            android:textSize="18sp" />
+    </RelativeLayout>-->
+</LinearLayout>

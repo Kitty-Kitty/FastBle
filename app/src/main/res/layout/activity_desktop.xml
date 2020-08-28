@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/line1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/shape_login"
+        app:title="传感器管理演示（非卖品，仅供学习参考不能用于商业交易）"
+        app:titleTextColor="@android:color/white" />
+
+    <LinearLayout
+        android:id="@+id/layout_sensors"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/ripple_color_f2f2f2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- <com.allen.library.SuperButton
+             android:id="@+id/btn0"
+             android:layout_width="80dp"
+             android:layout_height="120dp"
+             android:layout_margin="5dp"
+             android:text="B"
+             android:textColor="@android:color/black"
+             android:textColorHint="@color/darker_gray"
+             android:textSize="30sp"
+             android:shadowColor="@color/line"
+             android:shadowDx="0.5"
+             android:shadowDy="0.5"
+             android:shadowRadius="6"
+             app:sCornersRadius="5dp"
+             app:sSolidColor="@color/btn1"
+             app:sStrokeColor="#80AAAAAA"
+             app:sStrokeWidth="2dp" />-->
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn_down"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:text="A"
+            android:theme="@style/ShapeDownButton" />
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn2"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:text="B"
+            android:theme="@style/ShapeDownButton" />
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn3"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:text="C"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/darker_gray"
+            android:textSize="30sp"
+            android:shadowColor="@color/line"
+            android:shadowDx="0.5"
+            android:shadowDy="0.5"
+            android:shadowRadius="6"
+            app:sCornersRadius="5dp"
+            app:sSolidColor="@color/btn8"
+            app:sStrokeColor="@color/btn16"
+            app:sStrokeWidth="2dp" />
+
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn4"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:text="D"
+            android:theme="@style/ShapeUpButton" />
+
+
+        <com.allen.library.SuperButton
+            android:id="@+id/btn_up"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:background="#CAE6CA"
+            android:shadowColor="@color/line"
+            android:shadowDx="0.5"
+            android:shadowDy="0.5"
+            android:shadowRadius="6"
+            android:text="E"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/darker_gray"
+            android:textSize="30sp"
+            app:sCornersRadius="5dp"
+            app:sSolidColor="#E6E6E6"
+            app:sStrokeColor="#80AAAAAA"
+            app:sStrokeWidth="2dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center|center_horizontal|center_vertical">
+
+        <!-- <com.github.clans.fab.FloatingActionButton
+             android:id="@+id/fab"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom|center"
+             android:layout_marginRight="8dp"
+             android:layout_marginBottom="8dp"
+             android:src="@drawable/category_selected"
+             app:fab_colorNormal="#DA4336"
+             app:fab_colorPressed="#E75043"
+             app:fab_colorRipple="#99FFFFFF"
+             app:fab_hideAnimation="@anim/fab_scale_down"
+             app:fab_label=""
+             app:fab_progress="0"
+             app:fab_progress_backgroundColor="#4D5C5959"
+             app:fab_progress_color="#FF009688"
+             app:fab_progress_indeterminate="false"
+             app:fab_progress_max="100"
+             app:fab_progress_showBackground="true"
+             app:fab_shadowColor="#66E3D7D7"
+             app:fab_shadowRadius="4dp"
+             app:fab_shadowXOffset="1dp"
+             app:fab_shadowYOffset="3dp"
+             app:fab_showAnimation="@anim/fab_scale_up"
+             app:fab_showShadow="true"
+             app:fab_size="normal" />-->
+
+        <include
+            layout="@layout/tab_bottom_circle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center|center_horizontal|center_vertical">-->
+
+
+    <!--<include
+        layout="@layout/tab_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp" />-->
+
+
+    <!--<include
+        layout="@layout/tab_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="55dp" />-->
+    <!--<Button
+        android:id="@+id/btn10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="0dp"
+        android:background="@color/btn6" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="我是底部" />-->
+</LinearLayout>

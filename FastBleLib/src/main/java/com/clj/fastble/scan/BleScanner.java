@@ -94,19 +94,19 @@ public class BleScanner {
         }
     };
 
-    public void scan(UUID[] serviceUuids, String[] names, String mac, boolean fuzzy,
+    public void scan(UUID[] serviceUuids, String[] names, String[] mac, boolean fuzzy,
                      long timeOut, final BleScanCallback callback) {
 
         startLeScan(serviceUuids, names, mac, fuzzy, false, timeOut, callback);
     }
 
-    public void scanAndConnect(UUID[] serviceUuids, String[] names, String mac, boolean fuzzy,
+    public void scanAndConnect(UUID[] serviceUuids, String[] names, String[] mac, boolean fuzzy,
                                long timeOut, BleScanAndConnectCallback callback) {
 
         startLeScan(serviceUuids, names, mac, fuzzy, true, timeOut, callback);
     }
 
-    private synchronized void startLeScan(UUID[] serviceUuids, String[] names, String mac, boolean fuzzy,
+    private synchronized void startLeScan(UUID[] serviceUuids, String[] names, String[] mac, boolean fuzzy,
                                           boolean needConnect, long timeOut, BleScanPresenterImp imp) {
 
         if (mBleScanState != BleScanState.STATE_IDLE) {
