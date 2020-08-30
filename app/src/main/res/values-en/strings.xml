@@ -44,5 +44,13 @@
     <string name="e003000000">Service stop exception</string>
     <string name="configuration_file_path">SensorServiceConfiguration.xml</string>
     <string name="password_error_message">error password!!!</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="system_loaded">system is ready</string>
+    <string name="system_running">system is running</string>
+    <string name="system_start_succeed">system is starting succeed</string>
+    <string name="system_stopped">system is stopped</string>
 
 </resources>

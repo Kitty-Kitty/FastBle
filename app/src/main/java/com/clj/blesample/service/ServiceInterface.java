@@ -22,6 +22,6 @@ public interface ServiceInterface {
     /**
      * 表示停止服务对象
      */
-    public boolean stop() throws ServiceException;
+    public boolean stop() throws ServiceException, InterruptedException;
 
 }

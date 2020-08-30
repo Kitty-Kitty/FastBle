@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/shape_login"
+        android:visibility="visible"
         app:title="传感器管理演示（非卖品，仅供学习参考不能用于商业交易）"
         app:titleTextColor="@android:color/white" />
 

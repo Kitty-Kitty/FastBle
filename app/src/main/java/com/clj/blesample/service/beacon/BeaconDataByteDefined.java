@@ -20,19 +20,19 @@ public enum BeaconDataByteDefined {
     /**
      * 表示设备Beacon的UUID
      */
-    UUID(4, 16),
+    //UUID(4, 16),
     /**
      * 表示设备主类型
      */
-    MAJOR(20, 2),
+    MAJOR(4, 2),
     /**
      * 表示设备子类型
      */
-    MINOR(22, 2),
+    MINOR(6, 2),
     /**
      * 表示发送数据信号强度
      */
-    RSSI(24, 1),
+    RSSI(8, 1),
     /**
      * 表示设备名称
      */

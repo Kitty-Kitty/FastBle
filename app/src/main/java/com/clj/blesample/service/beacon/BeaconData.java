@@ -274,6 +274,7 @@ public class BeaconData {
         }
 
 
+        /*
         //处理设备Beacon的UUID
         try {
             //byte[] tmpUUID = BeaconDataByteArrayParser.arrayCopy(beaconItem.bytes, BeaconDataByteDefined.UUID);
@@ -281,6 +282,8 @@ public class BeaconData {
         } catch (ServiceException e) {
             ServiceLog.e(e.getErrorCode());
         }
+        */
+
         //处理设备主类型
         try {
             setMajor(BeaconDataByteArrayParser.toInteger(beaconItem.bytes, BeaconDataByteDefined.MAJOR));

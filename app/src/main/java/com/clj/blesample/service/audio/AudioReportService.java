@@ -2,8 +2,9 @@ package com.clj.blesample.service.audio;
 
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
-import com.clj.blesample.service.ServiceInterface;
+import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
 
 import java.util.Comparator;
@@ -21,7 +22,7 @@ import net.gotev.speech.Speech;
  * @version 1.0
  * @created 23-7月-2020 14:44:12
  */
-public class AudioReportService implements ServiceInterface {
+public class AudioReportService extends ServiceBase {
     /**
      * 表示最大堆中保存的元素最大数据
      */
@@ -99,7 +100,7 @@ public class AudioReportService implements ServiceInterface {
             //
             @Override
             public void run() {
-                while (true) {
+                while (isStarted()) {
                     AudioReportDataItem item = getDataItemQueue().poll();
 
                     if (null != item) {
@@ -123,10 +124,11 @@ public class AudioReportService implements ServiceInterface {
                 }
             }
         }));
+
         ServiceLog.i("create thread[ %s ] succeed!", getThread().toString());
 
         //Speech.getInstance().say("系统正在初始化");
-        return true;
+        return super.initialize();
     }
 
     /**
@@ -137,16 +139,22 @@ public class AudioReportService implements ServiceInterface {
         getThread().start();
         ServiceLog.i("start thread[ %s ] succeed!", getThread().toString());
         //Speech.getInstance().say("系统已经准备就绪，可以正常使用！");
-        return true;
+        return super.start();
     }
 
     /**
      * 表示停止服务对象
      */
     public boolean stop() {
-        getThread().interrupt();
+        super.stop();
+        try {
+            getThread().join(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //getThread().interrupt();
         Speech.getInstance().shutdown();
-        return true;
+        return super.stop();
     }
 
     /**
@@ -352,5 +360,18 @@ public class AudioReportService implements ServiceInterface {
                 }
             }
         }
+    }
+
+    /**
+     * 功能：
+     * 播放语音内容
+     * 返回：
+     * 无
+     *
+     * @param message 表示需要语音的字符串
+     */
+    public void say(@NonNull final String message) {
+        Speech.getInstance().say(message);
+        ServiceLog.d("speech [%s] succeed!", message);
     }
 }//end AudioReport

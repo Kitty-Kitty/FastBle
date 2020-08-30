@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import com.clj.blesample.R;
 import com.clj.blesample.service.Sensor;
 import com.clj.blesample.service.SensorService;
+import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
 import com.clj.blesample.service.analyze.AnalyzeDataItem;
 
@@ -28,7 +29,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @version 1.0
  * @created 23-7月-2020 14:44:13
  */
-public class ShowService {
+public class ShowService extends ServiceBase {
 
     /**
      * 表示当前数据处理线程对象
@@ -92,7 +93,7 @@ public class ShowService {
             //
             @Override
             public void run() {
-                while (true) {
+                while (isStarted()) {
                     AnalyzeDataItem item = getDataItemQueue().poll();
 
                     if (null != item) {
@@ -108,7 +109,7 @@ public class ShowService {
             }
         }));
         ServiceLog.i("create thread[ %s ] succeed!", getThread().toString());
-        return true;
+        return super.initialize();
 
     }
 
@@ -116,17 +117,23 @@ public class ShowService {
      * 表示启动服务对象
      */
     public boolean start() {
+        super.start();
         getThread().start();
         ServiceLog.i("start thread[ %s ] succeed!", getThread().toString());
-        return true;
+        return super.start();
     }
 
     /**
      * 表示停止服务对象
      */
     public boolean stop() {
-        getThread().interrupt();
-        return true;
+        super.stop();
+        try {
+            getThread().join(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return super.stop();
     }
 
     /**

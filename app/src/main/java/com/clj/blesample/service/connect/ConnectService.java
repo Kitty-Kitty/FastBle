@@ -6,7 +6,7 @@ import android.bluetooth.BluetoothGatt;
 import com.clj.blesample.service.BleSensor;
 import com.clj.blesample.service.SensorService;
 import com.clj.blesample.service.ServiceException;
-import com.clj.blesample.service.ServiceInterface;
+import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleNotifyCallback;
@@ -23,7 +23,7 @@ import java.util.Map;
  * @version 1.0
  * @created 23-7月-2020 14:44:13
  */
-public class ConnectService implements ServiceInterface {
+public class ConnectService extends ServiceBase {
 
     public ConnectService() {
 

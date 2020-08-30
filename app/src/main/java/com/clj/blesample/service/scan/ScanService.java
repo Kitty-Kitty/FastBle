@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import com.clj.blesample.service.BleSensor;
 import com.clj.blesample.service.SensorService;
-import com.clj.blesample.service.ServiceInterface;
+import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
 import com.clj.blesample.service.beans.BleScanRuleConfiguration;
 import com.clj.fastble.BleManager;
@@ -27,7 +27,7 @@ import java.util.UUID;
  * @version 1.0
  * @created 23 -7月-2020 14:44:13
  */
-public class ScanService implements ServiceInterface {
+public class ScanService extends ServiceBase {
 
     /**
      * Instantiates a new Scan service.
@@ -53,14 +53,18 @@ public class ScanService implements ServiceInterface {
             ServiceLog.i("initialize ScanRule succeed!");
         }
 
-        return true;
+        return super.initialize();
     }
 
     /**
      * 表示启动服务对象
      */
     public boolean start() {
-        return startBleScan();
+        if (startBleScan()) {
+            return super.start();
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -68,7 +72,7 @@ public class ScanService implements ServiceInterface {
      */
     public boolean stop() {
         BleManager.getInstance().cancelScan();
-        return true;
+        return super.stop();
     }
 
     /**

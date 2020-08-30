@@ -16,7 +16,7 @@ public enum BeaconDataStructures {
     /**
      * 描述制造商指定信息
      */
-    MANUFACTURER_SPECIFIC_DATA((short) 0x1A, (short) 0xFF, new byte[]{0x59, 0x00}, "Manufacturer specific data"),
+    MANUFACTURER_SPECIFIC_DATA((short) 0x0A, (short) 0xFF, new byte[]{0x59, 0x00}, "Manufacturer specific data"),
     /**
      * 表示附加的传感器主要信息
      */

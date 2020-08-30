@@ -2,7 +2,7 @@ package com.clj.blesample.service.analyze;
 
 
 import com.clj.blesample.service.SensorService;
-import com.clj.blesample.service.ServiceInterface;
+import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
 import com.clj.blesample.service.audio.AudioReportDataItem;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @version 1.0
  * @created 23-7月-2020 14:44:12
  */
-public class AnalyzeDataService implements ServiceInterface {
+public class AnalyzeDataService extends ServiceBase {
 
     /**
      * 表示最大堆中保存的元素最大数据
@@ -93,7 +93,7 @@ public class AnalyzeDataService implements ServiceInterface {
             //
             @Override
             public void run() {
-                while (true) {
+                while (isStarted()) {
                     AnalyzeDataItem item = getDataItemQueue().poll();
 
                     if (null != item) {
@@ -109,24 +109,31 @@ public class AnalyzeDataService implements ServiceInterface {
             }
         }));
         ServiceLog.i("create thread[ %s ] succeed!", getThread().toString());
-        return true;
+        return super.initialize();
     }
 
     /**
      * 表示启动服务对象
      */
     public boolean start() {
+        super.start();
         getThread().start();
         ServiceLog.i("start thread[ %s ] succeed!", getThread().toString());
-        return true;
+        return super.start();
     }
 
     /**
      * 表示停止服务对象
      */
     public boolean stop() {
-        getThread().interrupt();
-        return true;
+        super.stop();
+        try {
+            getThread().join(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //getThread().interrupt();
+        return super.stop();
     }
 
     /**

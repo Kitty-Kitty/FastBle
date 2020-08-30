@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  * @updated 22 -7月-2020 18:29:26
  */
-public class SensorService implements ServiceInterface {
+public class SensorService extends ServiceBase {
 
     /**
      * 表示系统配置文件完整路径
@@ -145,23 +145,33 @@ public class SensorService implements ServiceInterface {
 
         //创建需要的几个基础对象
 
-        //系统设备显示服务
-        setShowService(new ShowService());
-        if (!getShowService().initialize(getActivity())) {
-            ServiceLog.e("ShowService initialize failed!");
-            return false;
-        } else {
-            ServiceLog.i("ShowService initialize succeed!");
+        /*//系统设备显示服务
+        if (null == getShowService()) {
+            setShowService(new ShowService());
+        }
+
+        if (getShowService().isUnInitialized()) {
+            if (!getShowService().initialize(getActivity())) {
+                ServiceLog.e("ShowService initialize failed!");
+                return false;
+            } else {
+                ServiceLog.i("ShowService initialize succeed!");
+            }
         }
 
         //系统语音播放服务
-        setAudioReportService(new AudioReportService());
-        if (!getAudioReportService().initialize(getActivity())) {
-            ServiceLog.e("AudioReportService initialize failed!");
-            return false;
-        } else {
-            ServiceLog.i("AudioReportService initialize succeed!");
+        if (null == getAudioReportService()) {
+            setAudioReportService(new AudioReportService());
         }
+
+        if (getAudioReportService().isUnInitialized()) {
+            if (!getAudioReportService().initialize(getActivity())) {
+                ServiceLog.e("AudioReportService initialize failed!");
+                return false;
+            } else {
+                ServiceLog.i("AudioReportService initialize succeed!");
+            }
+        }*/
 
         //系统主要服务
         setCycleService(new CycleService());
@@ -174,7 +184,7 @@ public class SensorService implements ServiceInterface {
 
         setShowException(new ShowException());
 
-        return true;
+        return super.initialize();
     }
 
     /**
@@ -182,12 +192,12 @@ public class SensorService implements ServiceInterface {
      */
     public boolean start() {
 
-        if (isRunning()) {
+        if (isStarted()) {
             stop();
         }
 
-        //启动系统设备显示服务
-        if (null == getShowService() || !getShowService().start()) {
+       /* //启动系统设备显示服务
+        if (null == getShowService() || (!getShowService().isStarted() && !getShowService().start())) {
             ServiceLog.e("ShowService start failed!");
             return false;
         } else {
@@ -195,12 +205,12 @@ public class SensorService implements ServiceInterface {
         }
 
         //启动系统语音服务
-        if (null == getAudioReportService() || !getAudioReportService().start()) {
+        if (null == getAudioReportService() || (!getAudioReportService().isStarted() && !getAudioReportService().start())) {
             ServiceLog.e("AudioReportService start failed!");
             return false;
         } else {
             ServiceLog.i("AudioReportService start succeed!");
-        }
+        }*/
 
         //启动系统主要服务
         if (null == getCycleService() || !getCycleService().start()) {
@@ -209,9 +219,8 @@ public class SensorService implements ServiceInterface {
         } else {
             ServiceLog.i("CycleService start succeed!");
         }
-        setRunning(true);
 
-        return true;
+        return super.start();
     }
 
     /**
@@ -226,7 +235,7 @@ public class SensorService implements ServiceInterface {
             ServiceLog.i("CycleService stop succeed!");
         }
 
-        //停止系统语音服务
+        /*//停止系统语音服务
         if (null == getAudioReportService() || !getAudioReportService().stop()) {
             ServiceLog.e("AudioReportService stop failed!");
         } else {
@@ -238,11 +247,9 @@ public class SensorService implements ServiceInterface {
             ServiceLog.e("ShowService stop failed!");
         } else {
             ServiceLog.i("ShowService stop succeed!");
-        }
+        }*/
 
-        setRunning(false);
-
-        return true;
+        return super.stop();
     }
 
     /**
@@ -404,18 +411,117 @@ public class SensorService implements ServiceInterface {
     }
 
     /**
-     * 表示当前是否在运行状态
+     * 功能：
+     * 启动语音服务
+     * 返回：
+     * true  :  表示成功；
+     * false  :  表示失败；
+     *
+     * @param activity 当前活跃的用户界面对象
      */
-    public boolean isRunning() {
-        return running;
+    public boolean startAudioReportService(Activity activity) {
+
+        if (null == getAudioReportService()) {
+            setAudioReportService(new AudioReportService());
+        }
+
+        if (getAudioReportService().isUnInitialized()) {
+            //系统语音播放服务
+            if (!getAudioReportService().initialize(activity)) {
+                ServiceLog.e("AudioReportService initialize failed!");
+                return false;
+            } else {
+                ServiceLog.i("AudioReportService initialize succeed!");
+            }
+        }
+
+        if (!getAudioReportService().isStarted()) {
+            //启动系统语音服务
+            if (null == getAudioReportService() || !getAudioReportService().start()) {
+                ServiceLog.e("AudioReportService start failed!");
+                return false;
+            } else {
+                ServiceLog.i("AudioReportService start succeed!");
+            }
+        }
+
+        return true;
     }
 
     /**
-     * 表示当前是否在运行状态
-     *
-     * @param newVal
+     * 功能：
+     * 停止语音服务
+     * 返回：
+     * true  :  表示成功；
+     * false  :  表示失败；
      */
-    protected void setRunning(boolean newVal) {
-        running = newVal;
+    public boolean stopAudioReportService() {
+        //停止系统语音服务
+        if (null != getAudioReportService() && getAudioReportService().isStarted()) {
+            if (!getAudioReportService().stop()) {
+                ServiceLog.e("AudioReportService stop failed!");
+            } else {
+                ServiceLog.i("AudioReportService stop succeed!");
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 功能：
+     * 启动显示服务
+     * 返回：
+     * true  :  表示成功；
+     * false  :  表示失败；
+     *
+     * @param activity 当前活跃的用户界面对象
+     */
+    public boolean startShowService(Activity activity) {
+        if (null == getShowService()) {
+            setShowService(new ShowService());
+        }
+
+        if (getShowService().isUnInitialized()) {
+            //系统显示服务
+            if (!getShowService().initialize(activity)) {
+                ServiceLog.e("ShowService initialize failed!");
+                return false;
+            } else {
+                ServiceLog.i("ShowService initialize succeed!");
+            }
+        }
+
+        if (!getShowService().isStarted()) {
+            //启动显示服务
+            if (null == getShowService() || !getShowService().start()) {
+                ServiceLog.e("ShowService start failed!");
+                return false;
+            } else {
+                ServiceLog.i("ShowService start succeed!");
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 功能：
+     * 停止显示服务
+     * 返回：
+     * true  :  表示成功；
+     * false  :  表示失败；
+     */
+    public boolean stopShowService() {
+        //停止显示服务
+        if (null != getShowService() && getShowService().isStarted()) {
+            if (!getShowService().stop()) {
+                ServiceLog.e("ShowService stop failed!");
+            } else {
+                ServiceLog.i("ShowService stop succeed!");
+            }
+        }
+
+        return true;
     }
 }//end SensorService

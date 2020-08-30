@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 1.0
  * @created 23-7月-2020 14:44:13
  */
-public class CycleService implements ServiceInterface {
+public class CycleService extends ServiceBase {
 
     /**
      * 处理接收到的所有数据，根据分析接收到的数据判断当前设备状态
@@ -40,11 +40,6 @@ public class CycleService implements ServiceInterface {
      * 保存通信操作的BleSensor对象列表
      */
     private Map<String, BleSensor> bleSensores = new ConcurrentHashMap<String, BleSensor>();
-
-    /**
-     * 表示当前是否在运行状态
-     */
-    private boolean running = false;
 
     public CycleService() {
 
@@ -105,7 +100,7 @@ public class CycleService implements ServiceInterface {
         }
         */
 
-        return true;
+        return super.initialize();
     }
 
     /**
@@ -139,13 +134,15 @@ public class CycleService implements ServiceInterface {
         }
         */
 
-        return true;
+        return super.start();
     }
 
     /**
      * 表示停止服务对象
      */
     public boolean stop() {
+
+        super.stop();
 
         //停止连接服务
         /*
@@ -181,7 +178,7 @@ public class CycleService implements ServiceInterface {
             ServiceLog.i("stop BleManager succeed!");
         }
 
-        return true;
+        return super.stop();
     }
 
     /**
@@ -378,7 +375,7 @@ public class CycleService implements ServiceInterface {
 
         boolean tmpReturnBoolean = false;
 
-        setRunning(true);
+        super.start();
 
         //初始化BleSensor对象
         tmpReturnBoolean = getScanService().start(new ScanServiceCallback() {
@@ -408,7 +405,7 @@ public class CycleService implements ServiceInterface {
                              */
                 //AnalyzeScannedSensor(entry.getValue());
                 //}
-                if (isRunning()) {
+                if (isStarted()) {
                     //startScanService();
                     getScanService().start(this);
                 }
@@ -434,8 +431,6 @@ public class CycleService implements ServiceInterface {
     protected boolean stopScanService() {
         boolean tmpReturnBoolean = false;
 
-
-        setRunning(false);
 
         //停止ScanService对象
         tmpReturnBoolean = getScanService().stop();
@@ -622,19 +617,4 @@ public class CycleService implements ServiceInterface {
         return getAnalyzeDataService().addDataItem(tmpBeaconItem);
     }
 
-    /**
-     * 表示当前是否在运行状态
-     */
-    public boolean isRunning() {
-        return running;
-    }
-
-    /**
-     * 表示当前是否在运行状态
-     *
-     * @param newVal
-     */
-    protected void setRunning(boolean newVal) {
-        running = newVal;
-    }
 }//end CycleService
