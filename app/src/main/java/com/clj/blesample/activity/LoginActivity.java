@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 //这里主要是校验密码，密码成功则跳转到主界面
                 if (tmpStringPassword.equalsIgnoreCase("123456")) {
-                    Intent tmpIntent = new Intent(this, MainActivityShow.class);
+                    Intent tmpIntent = new Intent(this, DesktopActivity.class);
                     if (tmpIntent != null) {
                         startActivity(tmpIntent);
                     }
