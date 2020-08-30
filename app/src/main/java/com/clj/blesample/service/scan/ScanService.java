@@ -1,12 +1,12 @@
 package com.clj.blesample.service.scan;
 
 
-import android.bluetooth.le.ScanFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.clj.blesample.service.BleSensor;
+import com.clj.blesample.service.Sensor;
 import com.clj.blesample.service.SensorService;
 import com.clj.blesample.service.ServiceBase;
 import com.clj.blesample.service.ServiceLog;
@@ -18,6 +18,7 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -139,12 +140,24 @@ public class ScanService extends ServiceBase {
         }
 
         //可以描述指定的多个名称的设备，用“，”隔开
-        String[] macArray;
+        /*String[] macArray;
         String strMac = bsrc.getDeviceMac();
         if (TextUtils.isEmpty(strMac)) {
             macArray = null;
         } else {
             macArray = strMac.split(",");
+        }*/
+
+        String[] macArray = null;
+
+        if (!SensorService.getInstance().getSensores().isEmpty()) {
+            macArray = new String[SensorService.getInstance().getSensores().size()];
+
+            int i = 0;
+            for (Map.Entry<String, Sensor> entry
+                    : SensorService.getInstance().getSensores().entrySet()) {
+                macArray[i++] = entry.getValue().getDevice().getMac();
+            }
         }
 
         BleScanRuleConfig scanRuleConfig = new BleScanRuleConfig.Builder()

@@ -2,7 +2,9 @@
     <bleConfiguration>
         <scanConfiguration>
             <serviceUUID />
-            <deviceMac>F1:E1:D9:BD:13:51,CC:0C:30:4A:54:B3,DE:41:5B:D3:C6:CE</deviceMac>
+            <deviceMac>
+                DE:11:5B:D3:C6:CG,F1:E1:D9:BD:13:51,CC:0C:30:4A:54:B3,DE:41:5B:D3:C6:CE,FB:D9:D0:4C:45:D6,F3:E9:A7:E8:E3:43
+            </deviceMac>
             <deviceName />
             <scanTimeOut>200</scanTimeOut>
             <autoConnect>false</autoConnect>
@@ -19,7 +21,12 @@
     </bleConfiguration>
     <devices>
         <device>
-            <name>A</name>
+            <name>D</name>
+            <mac>DE:11:5B:D3:C6:CG</mac>
+            <uuid>00000005-0000-0000-0000-000000000000</uuid>
+        </device>
+        <device>
+            <name>C</name>
             <mac>F1:E1:D9:BD:13:51</mac>
             <uuid>00000000-0000-0000-0000-000000000000</uuid>
         </device>
@@ -29,9 +36,19 @@
             <uuid>00000001-0000-0000-0000-000000000000</uuid>
         </device>
         <device>
-            <name>C</name>
+            <name>A</name>
             <mac>DE:41:5B:D3:C6:CE</mac>
             <uuid>00000002-0000-0000-0000-000000000000</uuid>
+        </device>
+        <device>
+            <name>E</name>
+            <mac>FB:D9:D0:4C:45:D6</mac>
+            <uuid>10000002-0000-0000-0000-000000000000</uuid>
+        </device>
+        <device>
+            <name>F</name>
+            <mac>F3:E9:A7:E8:E3:43</mac>
+            <uuid>10000002-0000-0000-0000-000000000000</uuid>
         </device>
     </devices>
 </configuration>

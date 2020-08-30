@@ -100,7 +100,7 @@ public class ShowService extends ServiceBase {
                         processDataItem(item);
                     } else {
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

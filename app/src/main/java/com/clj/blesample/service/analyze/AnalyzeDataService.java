@@ -47,7 +47,7 @@ public class AnalyzeDataService extends ServiceBase {
     /**
      * 表示判断相似的相似度数值
      */
-    private float similarity = (float) 0.6;/*80%*/
+    private float similarity = (float) 0.7;/*80%*/
 
     public AnalyzeDataService() {
 
@@ -100,7 +100,7 @@ public class AnalyzeDataService extends ServiceBase {
                         processDataItem(item);
                     } else {
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -379,14 +379,14 @@ public class AnalyzeDataService extends ServiceBase {
         //比较accelerometerNormalise部分数据，如果差值在最小值的"similarity"倍，就认为是相似的
         tmpMin = Math.min(newDataItem.getAccelerometerNormalise(), oldDataItem.getAccelerometerNormalise());
         tmpMax = Math.max(newDataItem.getAccelerometerNormalise(), oldDataItem.getAccelerometerNormalise());
-        if (tmpMin / tmpMax < getSimilarity()) {
+        if (0 != tmpMax && tmpMin / tmpMax < getSimilarity()) {
             return false;
         }
 
         //比较gyroscopeNormalise部分数据，如果差值在最小值的"similarity"倍，就认为是相似的
         tmpMin = Math.min(newDataItem.getGyroscopeNormalise(), oldDataItem.getGyroscopeNormalise());
         tmpMax = Math.max(newDataItem.getGyroscopeNormalise(), oldDataItem.getGyroscopeNormalise());
-        if (tmpMin / tmpMax < getSimilarity()) {
+        if (0 != tmpMax && tmpMin / tmpMax < getSimilarity()) {
             return false;
         }
 

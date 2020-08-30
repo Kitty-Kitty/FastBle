@@ -34,7 +34,7 @@ public class AudioReportService extends ServiceBase {
     /**
      * 表示相同的数据单元的语音播报的间隔时间
      */
-    private static final int SAME_DATA_ITEM_AUDIO_REPORT_INTERVAL_TIME_MILLIS = 2000;
+    private static final int SAME_DATA_ITEM_AUDIO_REPORT_INTERVAL_TIME_MILLIS = 3000;
 
     /**
      * 表示当前处理的播报数据队列
@@ -116,7 +116,7 @@ public class AudioReportService extends ServiceBase {
                         }
                     } else {
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(10);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -136,6 +136,7 @@ public class AudioReportService extends ServiceBase {
      */
     public boolean start() {
         //Speech.getInstance().say("A B C D E F G H I J K L M N");
+        super.start();
         getThread().start();
         ServiceLog.i("start thread[ %s ] succeed!", getThread().toString());
         //Speech.getInstance().say("系统已经准备就绪，可以正常使用！");
